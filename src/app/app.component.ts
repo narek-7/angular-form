@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +17,13 @@ export class AppComponent implements OnInit {
 
   @ViewChild('dismiss', { static: false }) inputRef!: ElementRef;
 
+  constructor(private http: HttpClient) {}
+
   ngOnInit() {
     this.form = new FormGroup({
       dataLayer: new FormControl(),
       darkMode: new FormControl(null),
-      primaryColor: new FormControl('#146EFF', [Validators.required]),
+      primaryColor: new FormControl('', [Validators.required]),
       borderRadius: new FormControl('', [Validators.required]),
       dismissable: new FormControl(true),
       dismissType: new FormControl('cross'),
@@ -46,6 +49,14 @@ export class AppComponent implements OnInit {
     }
   }
 
+  handleResetForm() {
+    this.inputRef.nativeElement.style.display = 'block';
+    this.dismissText = '';
+    this.dismissType = 'cross';
+    this.closeConsentBar = false;
+    this.isDisgusting = false;
+  }
+
   hadleDisgusting() {
     this.isDisgusting = !this.isDisgusting;
     this.dismissText = '';
@@ -57,7 +68,6 @@ export class AppComponent implements OnInit {
 
   submit() {
     const formData = { ...this.form.value };
-
     if (this.form.valid) {
       this.handleDismissType();
       if (formData.darkMode === null) {
@@ -74,8 +84,19 @@ export class AppComponent implements OnInit {
       }
       formData.dismissable = this.dismissType === 'cross' ? true : false;
       formData.dismissType = this.dismissType;
-
+      this.handleResetForm();
+      this.form.reset();
       console.log(formData);
+
+      this.http.put<JSON>(
+        'https://fenarek.blob.core.windows.net/narek/assets/options.json',
+        JSON.stringify(formData),
+        {
+          headers: new HttpHeaders({
+            'x-ms-blob-type': 'BlockBlob',
+          }),
+        }
+      );
     }
   }
 }

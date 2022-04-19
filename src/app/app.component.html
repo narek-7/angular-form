@@ -28,6 +28,9 @@
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
       <h4>Primary Color</h4>
       <input type="color" formControlName="primaryColor" />
+      <div *ngIf="form.get('primaryColor')?.invalid" class="validation">
+        <small>You have to set the primary color</small>
+      </div>
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
@@ -37,12 +40,7 @@
         class="form-control mb-3"
         formControlName="borderRadius"
       />
-      <div
-        *ngIf="
-          form.get('borderRadius')?.invalid && form.get('borderRadius')?.touched
-        "
-        class="validation"
-      >
+      <div *ngIf="form.get('borderRadius')?.invalid" class="validation">
         <small> Border Radius can not be empty </small>
       </div>
     </div>
@@ -92,6 +90,7 @@
         <span class="input-group" *ngIf="!isDisgusting">
           <input
             type="text"
+            [value]="dismissText"
             (input)="hadleDismissText($event)"
             class="form-control"
             placeholder="describe reason"
