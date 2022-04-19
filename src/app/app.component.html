@@ -13,17 +13,12 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
       <h4>Dark Background Color</h4>
-      <input
-        type="radio"
-        value="no"
-        name="darkMode"
-        formControlName="darkMode"
-      />
+      <input type="radio" value="" name="darkMode" formControlName="darkMode" />
       <label for="no">No</label>
 
       <input
         type="radio"
-        value="yes"
+        value="true"
         name="darkMode"
         formControlName="darkMode"
       />
@@ -53,80 +48,6 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Consentbar</h4>
-      <input
-        type="checkbox"
-        name="dismissable"
-        #dismiss
-        formControlName="dismissable"
-        (click)="hadleDismissType()"
-      />
-      <label>To cancel</label>
-    </div>
-
-    <!-- <div class="card shadow-sm p-3 mb-5 bg-body rounded" style="display: none">
-      <h4>Dismiss Reason</h4>
-      <select formControlName="dismissType" class="form-control mb-3">
-        <option value="cross">cross</option>
-        <option value="cross-faint">cross-faint</option>
-        <option value="text">text</option>
-      </select>
-    </div> -->
-
-    <div
-      *ngIf="dismissType"
-      class="shadow-sm p-3 mb-5 bg-body rounded"
-      role="group"
-      aria-label="Basic radio toggle button group"
-    >
-      <h4>Dismiss Reason</h4>
-      <input
-        type="radio"
-        class="btn-check"
-        name="btnradio"
-        id="btnradio1"
-        autocomplete="off"
-        checked
-      />
-      <label class="btn btn-outline-primary" for="btnradio1">cross</label>
-
-      <input
-        type="radio"
-        class="btn-check"
-        name="btnradio"
-        id="btnradio2"
-        autocomplete="off"
-      />
-      <label class="btn btn-outline-primary" for="btnradio2">cross-faint</label>
-
-      <input
-        type="radio"
-        class="btn-check"
-        name="btnradio"
-        id="btnradio3"
-        autocomplete="off"
-      />
-      <label class="btn btn-outline-primary" for="btnradio3">text</label>
-    </div>
-
-    <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Period of next display of the consentbar (days)</h4>
-      <input
-        type="number"
-        class="form-control mb-3"
-        formControlName="expiration"
-      />
-      <div
-        *ngIf="
-          form.get('expiration')?.invalid && form.get('expiration')?.touched
-        "
-        class="validation"
-      >
-        <small> Consentbar can not be empty </small>
-      </div>
-    </div>
-
-    <div class="card shadow-sm p-3 mb-5 bg-body rounded">
       <h4>Closs The Precen</h4>
       <select formControlName="closeType" class="form-control mb-3">
         <option value=""></option>
@@ -135,72 +56,66 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-
-    <!--
-
     <div
-      *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
-      class="validation"
+      class="shadow-sm p-3 mb-5 bg-body rounded"
+      style="position: fixed; top: 1rem; left: 1rem"
+      #dismiss
     >
-      <small *ngIf="form.get('email')?.errors?.required">
-        Email field can not be empty
-      </small>
-
-      <small *ngIf="form.get('email')?.errors?.email">
-        Enter the correct email
-      </small>
-    </div> -->
-
-    <!-- <div class="form-control mb-3">
-      <label>Password</label>
-      <input type="password" placeholder="Пароль" formControlName="password" />
-
+      <h4>Consentbar</h4>
       <div
-        *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
-        class="validation"
+        class="card shadow-sm p-3 mb-1 bg-body rounded"
+        style="display: inline-block"
       >
-        <small *ngIf="form.get('password')?.errors?.required">
-          Password can not be empty
-        </small>
+        <h5>Reason for closing</h5>
+        <div>
+          <label>close</label>
+          <button
+            class="btn btn-outline-danger"
+            type="button"
+            style="border-radius: 45px"
+            (click)="hadleClose()"
+          >
+            X
+          </button>
+        </div>
 
-        <small *ngIf="form.get('password')?.errors?.minlength">
-          Long should be at least 8
-          {{ form.get("password")?.errors?.minlength.requiredLength }}. Сейчас
-          количество символов
-          {{ form.get("password")?.errors?.minlength.actualLength }}
-        </small>
+        <div>
+          <label>disgusting</label>
+          <input
+            class="btn btn-outline-danger"
+            type="checkbox"
+            style="border-radius: 45px"
+            (click)="hadleDisgusting()"
+          />
+        </div>
+
+        <span class="input-group" *ngIf="!isDisgusting">
+          <input
+            type="text"
+            (input)="hadleDismissText($event)"
+            class="form-control"
+            placeholder="describe reason"
+          />
+        </span>
+
+        <input
+          type="number"
+          class="form-control mb-3"
+          placeholder="Period of next display (days)"
+          formControlName="expiration"
+        />
+        <div *ngIf="form.get('expiration')?.invalid" class="validation">
+          <small>Period of consentbar can not be empty </small>
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <h2>Адрес</h2>
-
-      <div class="form-control mb-3">
-        <label>Страна</label>
-
-        <select>
-          <option value="ru">Россия</option>
-          <option value="ua">Украина</option>
-          <option value="by">Беларусь</option>
-        </select>
-      </div>
-
-      <div class="form-control mb-3">
-        <input type="text" />
-      </div>
-
-      <button class="btn" type="button">Выбрать столицу</button>
-    </div>
-
-    <div class="card">
-      <h2>Ваши навыки</h2>
-      <button class="btn" type="button">Добавить умение</button>
-      <div class="form-control mb-3">
-        <label></label>
-        <input type="text" />
-      </div>
-    </div> -->
-    <!-- [disabled]="form.invalid" -->
+    <button
+      type="submit"
+      class="btn btn-primary mt-3"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
   </form>
 </div>
