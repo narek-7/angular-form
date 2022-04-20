@@ -17,4 +17,4 @@ You can install the project locally with
 ```npm i ```
 
 ### Design
-I used adaptive and responsive design. Used **bootstrap** framework.
+I used adaptive and responsive design. Used the **bootstrap** framework.
