@@ -2,6 +2,54 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h1>Angular Forms</h1>
 
+    <div class="consent-bar shadow-sm p-3 mb-5 bg-body rounded" #dismiss>
+      <h4>Consent Bar</h4>
+      <div
+        class="card shadow-sm p-3 mb-1 bg-body rounded"
+        style="display: inline-block"
+      >
+        <h5>Type of action to dismiss consent bar</h5>
+        <div class="card shadow-sm p-3 mb-1 bg-body rounded">
+          <div>
+            <label>disgusting</label>
+            <input
+              class="btn btn-outline-danger"
+              type="checkbox"
+              style="border-radius: 45px"
+              (click)="hadleDisgusting()"
+            />
+          </div>
+          <span class="input-group" *ngIf="!isDisgusting">
+            <input
+              type="text"
+              [value]="dismissText"
+              (input)="hadleDismissText($event)"
+              class="form-control"
+              placeholder="describe the reason"
+            />
+          </span>
+        </div>
+
+        <input
+          type="number"
+          class="form-control mb-3"
+          placeholder="Period of next display in days"
+          formControlName="expiration"
+        />
+        <div *ngIf="form.get('expiration')?.invalid" class="validation">
+          <small>Period of consent bar can not be empty </small>
+        </div>
+
+        <button
+          class="btn btn-outline-danger"
+          type="button"
+          (click)="hadleClose()"
+        >
+          X
+        </button>
+      </div>
+    </div>
+
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
       <h4>Data Layer object name</h4>
       <input
@@ -34,7 +82,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Basic border radius for elements with rounded corners in px</h4>
+      <h4 >Basic border radius for elements</h4>
       <input
         type="number"
         class="form-control mb-3"
@@ -52,58 +100,6 @@
         <option value="cross">cross</option>
         <option value="tab">tab</option>
       </select>
-    </div>
-
-    <div
-      class="shadow-sm p-3 mb-5 bg-body rounded"
-      style="position: fixed; top: 1rem; left: 1rem"
-      #dismiss
-    >
-      <h4>Consentbar</h4>
-      <div
-        class="card shadow-sm p-3 mb-1 bg-body rounded"
-        style="display: inline-block"
-      >
-        <h5>Type of action to dismiss consentbar</h5>
-        <div class="card shadow-sm p-3 mb-1 bg-body rounded">
-          <div>
-            <label>disgusting</label>
-            <input
-              class="btn btn-outline-danger"
-              type="checkbox"
-              style="border-radius: 45px"
-              (click)="hadleDisgusting()"
-            />
-          </div>
-          <span class="input-group" *ngIf="!isDisgusting">
-            <input
-              type="text"
-              [value]="dismissText"
-              (input)="hadleDismissText($event)"
-              class="form-control"
-              placeholder="describe the reason"
-            />
-          </span>
-          <button
-            class="btn btn-outline-danger"
-            type="button"
-            style="border-radius: 45px"
-            (click)="hadleClose()"
-          >
-            X
-          </button>
-        </div>
-
-        <input
-          type="number"
-          class="form-control mb-3"
-          placeholder="Period of next display in days"
-          formControlName="expiration"
-        />
-        <div *ngIf="form.get('expiration')?.invalid" class="validation">
-          <small>Period of consentbar can not be empty </small>
-        </div>
-      </div>
     </div>
 
     <div class="card shadow-sm p-3 mb-1 bg-body rounded">
