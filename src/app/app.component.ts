@@ -66,6 +66,11 @@ export class AppComponent implements OnInit {
     this.dismissText = event.target.value;
   }
 
+  getData() {
+    const data = localStorage.getItem('formData');
+    console.log(data ? JSON.parse(data) : {});
+  }
+
   submit() {
     const formData = { ...this.form.value };
     if (this.form.valid) {
@@ -88,15 +93,17 @@ export class AppComponent implements OnInit {
       this.form.reset();
       console.log(formData);
 
-      this.http.put<JSON>(
-        'https://fenarek.blob.core.windows.net/narek/assets/options.json',
-        formData,
-        {
-          headers: new HttpHeaders({
-            'x-ms-blob-type': 'BlockBlob',
-          }),
-        }
-      );
+      localStorage.setItem('formData', JSON.stringify(formData));
+
+      // this.http.put<JSON>(
+      //   'https://fenarek.blob.core.windows.net/narek/assets/options.json',
+      //   formData,
+      //   {
+      //     headers: new HttpHeaders({
+      //       'x-ms-blob-type': 'BlockBlob',
+      //     }),
+      //   }
+      // );
     }
   }
 }

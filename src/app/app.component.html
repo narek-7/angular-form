@@ -3,7 +3,7 @@
     <h1>Angular Forms</h1>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Data Layer Name</h4>
+      <h4>Data Layer object name</h4>
       <input
         type="text"
         class="form-control mb-3"
@@ -12,7 +12,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Dark Background Color</h4>
+      <h4>If the background color is dark or light</h4>
       <input type="radio" value="" name="darkMode" formControlName="darkMode" />
       <label for="no">No</label>
 
@@ -26,7 +26,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Primary Color</h4>
+      <h4>Primary action color. Used for buttons and links</h4>
       <input type="color" formControlName="primaryColor" />
       <div *ngIf="form.get('primaryColor')?.invalid" class="validation">
         <small>You have to set the primary color</small>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Border Radius</h4>
+      <h4>Basic border radius for elements with rounded corners in px</h4>
       <input
         type="number"
         class="form-control mb-3"
@@ -46,7 +46,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4>Closs The Precen</h4>
+      <h4>Type of the closing action for Precen</h4>
       <select formControlName="closeType" class="form-control mb-3">
         <option value=""></option>
         <option value="cross">cross</option>
@@ -64,9 +64,26 @@
         class="card shadow-sm p-3 mb-1 bg-body rounded"
         style="display: inline-block"
       >
-        <h5>Reason for closing</h5>
-        <div>
-          <label>close</label>
+        <h5>Type of action to dismiss consentbar</h5>
+        <div class="card shadow-sm p-3 mb-1 bg-body rounded">
+          <div>
+            <label>disgusting</label>
+            <input
+              class="btn btn-outline-danger"
+              type="checkbox"
+              style="border-radius: 45px"
+              (click)="hadleDisgusting()"
+            />
+          </div>
+          <span class="input-group" *ngIf="!isDisgusting">
+            <input
+              type="text"
+              [value]="dismissText"
+              (input)="hadleDismissText($event)"
+              class="form-control"
+              placeholder="describe the reason"
+            />
+          </span>
           <button
             class="btn btn-outline-danger"
             type="button"
@@ -77,30 +94,10 @@
           </button>
         </div>
 
-        <div>
-          <label>disgusting</label>
-          <input
-            class="btn btn-outline-danger"
-            type="checkbox"
-            style="border-radius: 45px"
-            (click)="hadleDisgusting()"
-          />
-        </div>
-
-        <span class="input-group" *ngIf="!isDisgusting">
-          <input
-            type="text"
-            [value]="dismissText"
-            (input)="hadleDismissText($event)"
-            class="form-control"
-            placeholder="describe reason"
-          />
-        </span>
-
         <input
           type="number"
           class="form-control mb-3"
-          placeholder="Period of next display (days)"
+          placeholder="Period of next display in days"
           formControlName="expiration"
         />
         <div *ngIf="form.get('expiration')?.invalid" class="validation">
@@ -109,12 +106,17 @@
       </div>
     </div>
 
-    <button
-      type="submit"
-      class="btn btn-primary mt-3"
-      [disabled]="form.invalid"
-    >
-      Submit
-    </button>
+    <div class="card shadow-sm p-3 mb-1 bg-body rounded">
+      <button class="btn btn-warning" type="button" (click)="getData()">
+        Get Data
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary mt-3"
+        [disabled]="form.invalid"
+      >
+        Save Data
+      </button>
+    </div>
   </form>
 </div>
