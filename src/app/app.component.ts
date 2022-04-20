@@ -71,6 +71,10 @@ export class AppComponent implements OnInit {
     console.log(data ? JSON.parse(data) : {});
   }
 
+  saveData(formData: object) {
+    localStorage.setItem('formData', JSON.stringify(formData));
+  }
+
   submit() {
     const formData = { ...this.form.value };
     if (this.form.valid) {
@@ -91,9 +95,8 @@ export class AppComponent implements OnInit {
       formData.dismissType = this.dismissType;
       this.handleResetForm();
       this.form.reset();
+      this.saveData(formData);
       console.log(formData);
-
-      localStorage.setItem('formData', JSON.stringify(formData));
     }
   }
 }
