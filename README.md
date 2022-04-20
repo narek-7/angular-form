@@ -15,10 +15,10 @@ In form some fields are required and some are not. Invalid form cannot be submit
  *"Get Data"*
 
 ### Install
-Installation
-Clone the repository with GIT
+
+- Clone the repository from GIT
 ```https://github.com/narek-7/angular-form.git```
-install a package and any packages that it depends on
+ - install a package and any packages that it depends on
 ```npm i ```
 
 ### Design
