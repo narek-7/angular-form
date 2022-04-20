@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
 
       this.http.put<JSON>(
         'https://fenarek.blob.core.windows.net/narek/assets/options.json',
-        JSON.stringify(formData),
+        formData,
         {
           headers: new HttpHeaders({
             'x-ms-blob-type': 'BlockBlob',
