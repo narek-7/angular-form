@@ -94,16 +94,6 @@ export class AppComponent implements OnInit {
       console.log(formData);
 
       localStorage.setItem('formData', JSON.stringify(formData));
-
-      // this.http.put<JSON>(
-      //   'https://fenarek.blob.core.windows.net/narek/assets/options.json',
-      //   formData,
-      //   {
-      //     headers: new HttpHeaders({
-      //       'x-ms-blob-type': 'BlockBlob',
-      //     }),
-      //   }
-      // );
     }
   }
 }
