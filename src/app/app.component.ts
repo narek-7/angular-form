@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
     this.dismissType = 'cross';
     this.closeConsentBar = false;
     this.isDisgusting = false;
+    this.form.reset();
   }
 
   hadleDisgusting() {
@@ -83,6 +84,8 @@ export class AppComponent implements OnInit {
     }, 2000);
   }
 
+  
+
   submit() {
     const formData = { ...this.form.value };
     if (this.form.valid) {
@@ -95,14 +98,12 @@ export class AppComponent implements OnInit {
       if (!formData.closeType) {
         delete formData.closeType;
       }
-
       if (!formData.dataLayer) {
         delete formData.dataLayer;
       }
       formData.dismissable = this.dismissType === 'cross' ? true : false;
       formData.dismissType = this.dismissType;
       this.handleResetForm();
-      this.form.reset();
       this.saveData(formData);
       this.handleAlertMessage();
     }
