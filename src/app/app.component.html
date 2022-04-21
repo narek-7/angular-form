@@ -1,6 +1,6 @@
 <div class="container">
   <div class="alert alert-primary" role="alert" *ngIf="showAlert">
-   data saved successfully!
+    data saved successfully!
   </div>
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h1>Angular Forms</h1>
@@ -39,8 +39,14 @@
           placeholder="Period of next display in days"
           formControlName="expiration"
         />
-        <div *ngIf="form.get('expiration')?.invalid" class="validation">
-          <small>Period of consent bar can not be empty </small>
+        <div
+          *ngIf="form.get('expiration')?.errors?.required"
+          class="validation"
+        >
+          <small>Period of consent bar can not be empty!</small>
+        </div>
+        <div *ngIf="form.get('expiration')?.errors?.min" class="validation">
+          <small> The number must be positive!</small>
         </div>
 
         <button
@@ -91,8 +97,14 @@
         class="form-control mb-3"
         formControlName="borderRadius"
       />
-      <div *ngIf="form.get('borderRadius')?.invalid" class="validation">
-        <small> Border Radius can not be empty </small>
+      <div
+        *ngIf="form.get('borderRadius')?.errors?.required"
+        class="validation"
+      >
+        <small> Border Radius can not be empty!</small>
+      </div>
+      <div *ngIf="form.get('borderRadius')?.errors?.min" class="validation">
+        <small> The number must be positive!</small>
       </div>
     </div>
 

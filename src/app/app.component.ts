@@ -25,10 +25,10 @@ export class AppComponent implements OnInit {
       dataLayer: new FormControl(),
       darkMode: new FormControl(null),
       primaryColor: new FormControl('', [Validators.required]),
-      borderRadius: new FormControl('', [Validators.required]),
+      borderRadius: new FormControl('', [Validators.required,Validators.min(1)]),
       dismissable: new FormControl(true),
       dismissType: new FormControl('cross'),
-      expiration: new FormControl('', [Validators.required]),
+      expiration: new FormControl('', [Validators.required, Validators.min(1)]),
       closeType: new FormControl(''),
     });
   }
@@ -83,8 +83,6 @@ export class AppComponent implements OnInit {
       this.showAlert = false;
     }, 2000);
   }
-
-  
 
   submit() {
     const formData = { ...this.form.value };
