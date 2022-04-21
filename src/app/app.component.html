@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="alert alert-primary" role="alert" *ngIf="showAlert">
+    The data is saved!
+  </div>
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h1>Angular Forms</h1>
 
@@ -82,7 +85,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-      <h4 >Basic border radius for elements</h4>
+      <h4>Basic border radius for elements</h4>
       <input
         type="number"
         class="form-control mb-3"

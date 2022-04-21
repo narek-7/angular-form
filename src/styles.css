@@ -73,6 +73,15 @@ input {
   left: 1rem;
 }
 
+.alert {
+  position: fixed;
+  top: 1rem;
+  padding: .5rem 1rem;
+  z-index: 1;
+  font-size: 20px;
+  width: 500px;
+}
+
 @media (max-width: 1835px) {
   .container {
     margin-top: 5px;

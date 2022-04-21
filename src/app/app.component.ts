@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   dismissText: string = '';
   isDisgusting: boolean = false;
   dismissType: string = 'cross';
+  showAlert: boolean = false;
 
   @ViewChild('dismiss', { static: false }) inputRef!: ElementRef;
 
@@ -75,6 +76,13 @@ export class AppComponent implements OnInit {
     localStorage.setItem('formData', JSON.stringify(formData));
   }
 
+  handleAlertMessage() {
+    this.showAlert = true;
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 2000);
+  }
+
   submit() {
     const formData = { ...this.form.value };
     if (this.form.valid) {
@@ -96,7 +104,7 @@ export class AppComponent implements OnInit {
       this.handleResetForm();
       this.form.reset();
       this.saveData(formData);
-      console.log(formData);
+      this.handleAlertMessage();
     }
   }
 }

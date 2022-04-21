@@ -10,7 +10,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 The project was created with **Angular**. Implemented Forms using Angular standards.
  - details
 In form some fields are required and some are not. Invalid form cannot be submitted. In the project, If the form is executed correctly, then you can save the data in local storage with the button 
-*"Get Data"*
+*"Save Data"*
  If you need to get the saved date, you can find it in the console after pressing the button 
  *"Get Data"*
 
@@ -22,4 +22,4 @@ In form some fields are required and some are not. Invalid form cannot be submit
 ```npm i ```
 
 ### Design
-I used adaptive and responsive design. Used the **bootstrap** framework.
+I created an adaptive and responsive design. Used the **bootstrap** framework.
